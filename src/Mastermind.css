@@ -1,0 +1,66 @@
+.Mastermind {
+    width: 600px;
+    margin: 100px;
+    text-align: center;
+}
+
+.board_table {
+    margin: 0 auto;
+}
+
+.feedback_table {
+    margin-left: 20px;
+}
+
+.feedback_table td {
+    margin: 0;
+    border: 0;
+    padding: 3px;
+}
+
+.feedback_cell {
+    padding-left: 32px;
+}
+
+.palette_circles {
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.status_circles {
+    margin: 0 auto;
+}
+
+.status_circles td {
+    padding: 0 50px;
+}
+
+.large_circle {
+    width: 50px;
+    height: 50px;
+}
+
+.small_circle {
+    width: 15px;
+    height: 15px;
+}
+
+.invisible_table {
+  display: none;
+}
+
+ table {
+   border-color: white;
+ }
+
+td {
+  border-color: white;
+  border: none;
+}
+
+.outterDiv {
+  position: absolute;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
