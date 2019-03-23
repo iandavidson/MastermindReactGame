@@ -156,28 +156,30 @@ class Palette extends Component
 class Row extends Component
 {
 
-  IsFeedbackElementInvisible(feedbackCircle){
-    if(feedbackCircle.colorName !== "Invisible Circle"){
-        return(<img className="small_circle" src={feedbackCircle.color} alt={feedbackCircle.colorName} />);
-    }else{
-      // return(<p>nope</p>);
-      return(<img className="invisible_table" src={feedbackCircle.color} alt={feedbackCircle.colorName} />);
-    }
-  }
+  // IsFeedbackElementInvisible(feedbackCircle){
+  //   // if(feedbackCircle.colorName !== "Invisible Circle"){
+  //   //     return(<img className="small_circle" src={feedbackCircle.color} alt={feedbackCircle.colorName} />);
+  //   // }else{
+  //   //   // return(<p>nope</p>);
+  //   //   return(<img className="invisible_table small_circle" src={feedbackCircle.color} alt={feedbackCircle.colorName} />);
+  //   // }
+  //   return (<img className="small_circle" src={feedbackCircle.color} alt={feedbackCircle.colorName} />);
+  // }
 
 
 
   FeedbackElementRender(feedbackArray){
     // console.log(feedbackArray);
-
-
+//<td><img className="small_circle" src={feedbackCircle[2].color} alt={feedbackCircle[2].colorName} /></td>
+    //2,3,0,1
     return(
       <table>
           <tbody className="feedback_table">
-              <tr><td>{this.IsFeedbackElementInvisible(feedbackArray[2])}</td>
-                  <td>{this.IsFeedbackElementInvisible(feedbackArray[3])}</td></tr>
-              <tr><td>{this.IsFeedbackElementInvisible(feedbackArray[0])}</td>
-                  <td>{this.IsFeedbackElementInvisible(feedbackArray[1])}</td></tr>
+
+              <tr><td><img className="small_circle" src={feedbackArray[2].color} alt={feedbackArray[2].colorName} /></td>
+                  <td><img className="small_circle" src={feedbackArray[3].color} alt={feedbackArray[3].colorName} /></td></tr>
+              <tr><td><img className="small_circle" src={feedbackArray[0].color} alt={feedbackArray[0].colorName} /></td>
+                  <td><img className="small_circle" src={feedbackArray[1].color} alt={feedbackArray[1].colorName} /></td></tr>
           </tbody>
           </table>
     );
@@ -226,7 +228,6 @@ class Mastermind extends Component {
             colorName: 'Invisible Circle',
             visable: false
         }
-
 
 
         this.FeedbackEmpty =
@@ -332,11 +333,12 @@ class Mastermind extends Component {
           // alert("filled up the row");
           nextTurn = true;
           gameUpdate = this.checkMove(theRow);
+          // console.log(gameUpdate.feedbackArray)
           turn = 0;
           row += 1;
           gameUpdate.feedbackArrayCopy = this.state.feedbackArray.slice(0);
           gameUpdate.feedbackArrayCopy[row-1] = gameUpdate.feedbackArray;
-          // console.log(gameUpdate);
+          // console.log(gameUpdate.feedbackArrayCopy);
 
           if(gameUpdate.gameOver){
             done = true;
@@ -416,7 +418,13 @@ class Mastermind extends Component {
 
       // alert("reds: " + redCircles + " white: " + whiteCircles);
 
-      let feedbackArray = Array(4).fill({value: null});
+      let feedbackArray = Array(4).fill(
+        {
+          color: InvisibleCircle,
+          colorName: 'Invisible Circle',
+          visable: false
+        }
+      );
       for(let l =0; l < redCircles; l++){
         feedbackArray[l] = {
             color: red,
@@ -434,7 +442,7 @@ class Mastermind extends Component {
         };
       }
 
-
+      console.log(feedbackArray);
       if(redCircles === 4){
         return {feedbackArray: feedbackArray,
                 gameOver: true};
@@ -515,7 +523,7 @@ class Mastermind extends Component {
 
     topMessage(){
       if(this.state.winner){
-        return(<h3 role="image" aria-label="hamburger"> Borger 🍔 Borger</h3>);
+        return(<h3>You Win</h3>);
       }else if(this.state.gameOver){
         return(
           <h3>You Lost</h3>
@@ -530,7 +538,7 @@ class Mastermind extends Component {
 //<!-- put in a function call here to show game over/ winner/loser -->
     render() {
         return (
-            <div className="Mastermind">
+            <div className="Mastermind outterDiv">
                 {
                   this.topMessage()
                 }
